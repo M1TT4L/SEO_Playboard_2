@@ -43,6 +43,7 @@ const PagesDropdown = () => {
         >
           Admin Layout
         </span>
+        
         <Link
           to="/admin/dashboard"
           className={
@@ -51,6 +52,7 @@ const PagesDropdown = () => {
         >
           Dashboard
         </Link>
+
         <Link
           to="/admin/settings"
           className={
@@ -59,14 +61,16 @@ const PagesDropdown = () => {
         >
           Settings
         </Link>
-        <Link
+
+        {/* <Link
           to="/admin/tables"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
         >
           Tables
-        </Link>
+        </Link> */}
+
         <Link
           to="/admin/maps"
           className={
@@ -75,6 +79,7 @@ const PagesDropdown = () => {
         >
           Maps
         </Link>
+
         <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
         <span
           className={
@@ -83,6 +88,7 @@ const PagesDropdown = () => {
         >
           Auth Layout
         </span>
+
         <Link
           to="/auth/login"
           className={
@@ -91,6 +97,7 @@ const PagesDropdown = () => {
         >
           Login
         </Link>
+
         <Link
           to="/auth/register"
           className={
@@ -99,6 +106,7 @@ const PagesDropdown = () => {
         >
           Register
         </Link>
+
         <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
         <span
           className={
@@ -107,6 +115,7 @@ const PagesDropdown = () => {
         >
           No Layout
         </span>
+
         <Link
           to="/landing"
           className={
@@ -115,6 +124,7 @@ const PagesDropdown = () => {
         >
           Landing
         </Link>
+
         <Link
           to="/profile"
           className={
