@@ -1,88 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
+import FlipkartIcon from '../../assets/img/flipkart.svg'
 
 export default function Dashboard() {
+  const [isIframeVisible, setIsIframeVisible] = useState(true);
+  const [newURL, setNewURL] = useState('');
+
+  const handleClick = (newURL) => {
+    setIsIframeVisible(true);
+    setNewURL(newURL);
+  }
+
   return (
     <>
-      <div className="flex flex-wrap">
-        {/* <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">  
-          <button className="bg-amber-500 text-white active:bg-amber-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
-              Regular
-          </button>
-        </div>
-
-        <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">  
-          <button className="bg-amber-500 text-white active:bg-amber-600 font-bold uppercase text-sm px-6 py-5 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
-              Regular
-          </button>
-        </div> */}
-
-        {/* <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">  
+      <div className="flex flex-nowrap">
+        <div className="w-full xl:w-8/12 pt-24 xl:mb-0 px-4 my-2">
           <button
-            className="bg-lightBlue-500 text-white active:bg-amber-600 text-xs font-bold uppercase text-xl px-6 py-4 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
-            type="button"
-          >
-            FlipKart
-          </button>
-        </div> */}
-
-        <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">  
-        <a href="https://amazon.in" >
-            <button
-              className="bg-red-600 text-white active:bg-black text-xs font-bold uppercase text-xl px-6 py-4 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
-              type="button"
-            >
-              <i className="text-inherit fab fa-amazon text-5xl leading-lg " />
-            </button>
-          </a>
-        </div>
-
-        {/* <div className="w-1/2 sm:w-auto md:w-full lg:w-32 xl:w-3/4">  
-          <button className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-base px-10000 py-10 rounded-full shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
-            Large
-          </button>
-        </div> */}
-
-        {/* <div className="flex flex-wrap justify-center">
-          <div className="w-40 sm:w-auto md:w-full lg:w-32 xl:w-3/4">
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80" 
-             alt="..." 
-             className="shadow-lg rounded max-w-full h-auto align-middle border-none" />
-          </div>
-        </div> */}
-
-        <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
-          <a
             className="hover:text-blueGray-500 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-            href="https://amazon.in"
-            // target="_blank"
+            onClick={() => handleClick('https://www.amazon.in')}
           >
             <i className="text-inherit fab fa-amazon text-5xl leading-lg " />
             <span className="lg:hidden inline-block ml-2">Star</span>
-          </a>
+          </button>
         </div>
 
-        <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
-          <a
+        <div className="w-full xl:w-8/12 pt-24 xl:mb-0 px-4 my-2">
+          <button
             className="hover:text-blueGray-500 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-            href="https://amazon.in"
-            // target="_blank"
+            onClick={() => handleClick('https://www.ebay.com')}
           >
-            <i className=" fab fa-ebay text-5xl leading-lg " />
+            <i className="fab fa-ebay text-5xl leading-lg " />
             <span className="lg:hidden inline-block ml-2">Star</span>
-          </a>
+          </button>
         </div>
-
-        <div className="flex flex-wrap justify-center">
-          <div className="relative w-full h-full p-64"> 
-            <iframe title= "firstFrame" className= "relative inset-auto border-none"
-              src="https://www.amazon.in">
-
-            </iframe>
-          </div>
+        <div className="w-full xl:w-8/12 pt-24 xl:mb-0 px-4 my-2">
+          <button
+            className="hover:text-blueGray-500 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+            onClick={() => handleClick('https://www.etsy.com/')}
+          >
+            <i className="fab fa-etsy text-5xl leading-lg " />
+            <span className="lg:hidden inline-block ml-2">Star</span>
+          </button>
         </div>
-
-
+        <div className="w-full xl:w-8/12 pt-24 xl:mb-0 px-4 my-2">
+          <button
+            className="px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+            onClick={() => handleClick('https://www.flipkart.com/')}
+          >
+            <img src={FlipkartIcon} alt="Flipkart-icon"></img>
+            <span className="lg:hidden inline-block ml-2">Star</span>
+          </button>
+        </div>
       </div>
+      { isIframeVisible && (
+        <div className="w-full px-4 py-4"> 
+            <iframe title="new" className="flex w-full h-screen "
+              src={newURL}>
+            </iframe>
+          </div>)}
     </>
   );
 }
