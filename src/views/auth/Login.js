@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
-export default function Login() {
+const Login = () => {
+
+  const [email, setEmail] =useState('');
+  const [password, setPassword] =useState('');
+
+  const Loginhandler = async(e) =>{
+    e.preventDefault();
+    try{
+      const {data} = await axios.post("http://localhost:4000/api/v1/auth/login/" , {
+        email , password 
+    })
+    console.log(data)
+    alert('Logged In')
+    }catch(e) {
+      console.log(e);
+      alert(e.message.data)
+    }
+  };
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -44,7 +62,8 @@ export default function Login() {
                 <div className="text-blueGray-400 text-center mb-3 font-bold">
                   <small>Or sign in with credentials</small>
                 </div>
-                <form>
+                <form
+                onSubmit={Loginhandler}>
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -56,6 +75,7 @@ export default function Login() {
                       type="email"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Email"
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
 
@@ -70,6 +90,7 @@ export default function Login() {
                       type="password"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Password"
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
                   <div>
@@ -88,7 +109,8 @@ export default function Login() {
                   <div className="text-center mt-6">
                     <button
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                      type="button"
+                      type="submit"
+                      
                     >
                       Sign In
                     </button>
@@ -118,3 +140,4 @@ export default function Login() {
     </>
   );
 }
+export default Login

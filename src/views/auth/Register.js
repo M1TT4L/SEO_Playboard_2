@@ -1,6 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from 'axios';
 
-export default function Register() {
+
+const Register = () => {
+
+const [name, setName] = useState('')
+const [email, setEmail] = useState('')
+const [password, setPassword] = useState('')
+
+const RegisterHandler = async(e) => {
+    e.preventDefault();
+    try {
+      const {data} = await axios.post("http://localhost:4000/api/v1/auth/register/", {
+        name, email, password
+      })
+      console.log(data);
+      alert("Account Created successfully")
+    } catch (e) {
+      console.log();
+      alert(e.message.data)
+    }
+}
+
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -43,7 +64,8 @@ export default function Register() {
                 <div className="text-blueGray-400 text-center mb-3 font-bold">
                   <small>Or sign up with credentials</small>
                 </div>
-                <form>
+                <form
+                  onSubmit={RegisterHandler}>
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -52,9 +74,10 @@ export default function Register() {
                       Name
                     </label>
                     <input
-                      type="email"
+                      type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Name"
+                      onChange={(e) => setName(e.target.value)}
                     />
                   </div>
 
@@ -69,6 +92,7 @@ export default function Register() {
                       type="email"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Email"
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
 
@@ -83,6 +107,7 @@ export default function Register() {
                       type="password"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Password"
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
 
@@ -123,3 +148,4 @@ export default function Register() {
     </>
   );
 }
+export default Register
