@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import { notification } from "antd";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
+  const history = useHistory();
 
   const [email, setEmail] =useState('');
   const [password, setPassword] =useState('');
@@ -10,14 +13,15 @@ const Login = () => {
   const Loginhandler = async(e) =>{
     e.preventDefault();
     try{
-      const {data} = await axios.post("http://localhost:4000/api/v1/auth/login/" , {
+      const {data} = await axios.post("http://localhost:4000/api/v1/users/login" , {
         email , password 
     })
     console.log(data)
-    alert('Logged In')
+    notification.success({message: 'Logged In'})
+    history.push('/admin/dashboard')
     }catch(e) {
       console.log(e);
-      alert(e.message.data)
+      notification.error({message: 'Enter Vaild Credentials'})
     }
   };
   return (

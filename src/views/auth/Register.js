@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import axios from 'axios';
-
+import {notification } from 'antd';
+import { useHistory } from "react-router-dom";
 
 const Register = () => {
+const history=useHistory();
 
 const [name, setName] = useState('')
 const [email, setEmail] = useState('')
@@ -11,14 +13,15 @@ const [password, setPassword] = useState('')
 const RegisterHandler = async(e) => {
     e.preventDefault();
     try {
-      const {data} = await axios.post("http://localhost:4000/api/v1/auth/register/", {
+      const {data} = await axios.post("http://localhost:4000/api/v1/users/new", {
         name, email, password
       })
       console.log(data);
-      alert("Account Created successfully")
+      notification.success({message: 'Account Created Successfully'})
+      history.push('/auth/login')
     } catch (e) {
-      console.log();
-      alert(e.message.data)
+      console.log(e);
+      notification.error(e.message.data)
     }
 }
 
@@ -134,7 +137,7 @@ const RegisterHandler = async(e) => {
                   <div className="text-center mt-6">
                     <button
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                      type="button"
+                      type="submit"
                     >
                       Create Account
                     </button>
